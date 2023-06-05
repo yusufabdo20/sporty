@@ -64,61 +64,7 @@ Widget buildFormFieldText({
       onTap: onTap,
       enabled: isClickable,
     );
-Widget buildTextFeildTest({
-  required TextEditingController controller,
-  required String labelText,
-  // String? hintText,
-  required TextInputType keyboardType,
-  IconData? prefixIcon,
-  Color prefixIconColor = rgbBahgaPurple3,
-  // validate,
-  // IconData? suffix,
-  // Color? suffixColor = rgbBahgaPurple3,
-  // suffixPressed, // Function
-  // bool isSecure = false,
-  // onSubmit,
-  // onChange,
-  // Function()? onTap,
-  // bool isClickable = true,
-}) =>
-    TextFormField(
-      // obscureText: isSecure,
-      // validator: validate,
-      controller: controller,
-      decoration: InputDecoration(
-        // floatingLabelBehavior: FloatingLabelBehavior.never,
 
-        filled: true,
-        fillColor: Colors.white,
-        border: const OutlineInputBorder(
-            // borderSide: BorderSide(width: 3, color: Colors.yellowAccent),
-            borderRadius: BorderRadius.all(Radius.circular(16))),
-
-        enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(width: 1, color: Colors.white),
-            borderRadius: BorderRadius.all(Radius.circular(16))),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          borderSide: const BorderSide(color: rgbBahgaPurple2, width: 2),
-        ),
-        labelText: labelText,
-        labelStyle: const TextStyle(
-          fontSize: 16,
-          fontFamily: "JostBold",
-        ),
-        // hintText:  hintText,
-        prefixIcon: Icon(prefixIcon, color: prefixIconColor),
-        // suffixIcon: IconButton(
-        // onPressed: suffixPressed,
-        // icon: Icon(suffix, color: suffixColor),
-        // ),
-      ),
-      keyboardType: keyboardType,
-      // onFieldSubmitted: onSubmit,
-      // onChanged: onChange,
-      // onTap: onTap,
-      // enabled: isClickable,
-    );
 Widget buildElevatedTextButton({
   required Color backgroundColor,
   double colorOpacity = 1,
@@ -153,7 +99,6 @@ Widget buildElevatedTextButton({
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: textSize,
-              fontFamily: "JostBold",
               color: titleOfButtonColor),
         ),
       ),
@@ -203,97 +148,7 @@ Widget buildTextJostNormal({
       overflow: overflow,
     );
 
-// Widget buildBirthDatePickerTextField(
-//         {String? lable,
-//         String? hint,
-//         Color calenderIconColor = rgbBahgaPurple3,
-//         required TextEditingController controller,
-//         validator,
-//         context}) =>
-//     Container(
-//       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-//       decoration: const BoxDecoration(
-//         color: Colors.white,
-//         borderRadius: BorderRadius.all(
-//           Radius.circular(10),
-//         ),
-//       ),
-//       child: TextFormField(
-//         controller: controller,
-//         validator: validator,
-//         //editing controller of this TextField
-//         decoration: InputDecoration(
-//             icon: Icon(
-//               Icons.calendar_today,
-//               color: calenderIconColor,
-//             ),
-//             //icon of text field
-//             hintText: hint,
-//             labelText: lable,
-//             //label text of field
-//             labelStyle: const TextStyle(
-//                 fontFamily: 'JostBold', color: rgbBahgaPurple3)),
-//         readOnly: true,
-//         //set it true, so that user will not able to edit text
-//         onTap: () async {
-//           DateTime? pickedDate = await showDatePicker(
-//               context: context,
-//               initialDate: DateTime.now(),
-//               firstDate: DateTime(1950),
-//               //DateTime.now() - not to allow to choose before today.
-//               lastDate: DateTime(2100));
 
-//           if (pickedDate != null) {
-//             print(
-//                 pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-//             String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-//             print(
-//                 formattedDate); //formatted date output using intl package =>  2021-03-16
-//             controller.text =
-//                 formattedDate; //set output date to TextField value.
-//           } else {
-//             print("object >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-//           }
-//         },
-//       ),
-//     );
-
-Widget buildVerificationItemTextFormField(context) {
-  return Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Container(
-      alignment: Alignment.center,
-      height: 64,
-      width: 64,
-      decoration: const BoxDecoration(
-        color: rgbBahgaPurple1,
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
-      child: TextFormField(
-        showCursor: false,
-        onSaved: (pin) {},
-        decoration: const InputDecoration(
-          hintText: "0",
-          hintStyle: TextStyle(color: Colors.black38, fontFamily: "JostBold"),
-          border: InputBorder.none,
-        ),
-        onChanged: (value) {
-          if (value.length == 1) {
-            FocusScope.of(context).nextFocus();
-          }
-        },
-        keyboardType: TextInputType.number,
-        textAlign: TextAlign.center,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(1),
-          FilteringTextInputFormatter.digitsOnly,
-        ],
-      ),
-    ),
-  );
-}
 
 Future navigateTO(context, widget) {
   return Navigator.push(
@@ -327,7 +182,7 @@ Color chooseToastColor(ToastStates state) {
   Color color;
   switch (state) {
     case ToastStates.SUCCESS:
-      color = rgbBahgaPurple2;
+      color = Colors.green;
       break;
 
     case ToastStates.ERROR:

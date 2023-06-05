@@ -52,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title:
-            buildTextJost(text: 'BAHGA', textColor: Colors.black, textSize: 20),
+            buildTextJost(text: 'SPORTY', textColor: Colors.black, textSize: 20),
         actions: [
           TextButton(
               child: buildTextJost(

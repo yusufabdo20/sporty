@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sporty/screens/home_screen.dart';
+import 'package:sporty/screens/joined_envent_screen.dart';
 import 'package:sporty/screens/login_screen.dart';
+import 'package:sporty/screens/profile_screen.dart';
 import 'package:sporty/screens/signup_screen.dart';
 import 'package:sporty/screens/spalsh_screen.dart';
 import 'firebase_options.dart';
@@ -23,11 +26,15 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
       routes: {
-        LoginScreen.id: (context) => const LoginScreen(),
         SplashScreen.id: (context) => const SplashScreen(),
+        LoginScreen.id: (context) => const LoginScreen(),
         SignUpScreen.id: (context) => const SignUpScreen(),
+        HomeScreen.id: (context) => const HomeScreen(),
+        MyProfileScreen.id: (context) => const MyProfileScreen(),
+        MyJoinedScreen.id: (context) => const MyJoinedScreen(),
+        
       },
-      initialRoute: SplashScreen.id,
+      initialRoute: HomeScreen.id,
     );
   }
 }

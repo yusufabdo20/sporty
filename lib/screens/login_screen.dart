@@ -35,6 +35,7 @@ class LoginScreen extends StatelessWidget {
               CustomformTextField(
                 hintText: 'E-mail',
                 label: Text('E-mail'),
+                prefixIcon: Icon(Icons.email),
               ),
               const SizedBox(
                 height: 5,
@@ -42,7 +43,8 @@ class LoginScreen extends StatelessWidget {
               CustomformTextField(
                 hintText: 'Password',
                 obsecureText: true,
-                 label: Text('Password'),
+                label: Text('Password'),
+                prefixIcon: Icon(Icons.password_rounded),
               ),
               const SizedBox(
                 height: 10,

@@ -11,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -19,11 +19,11 @@ class SignUpScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/logo.png',
-                width: 500,
-                height: 200,
+                width: 240,
+                // height: 200,
               ),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
               const Text(
                 'Welcome! Let\'s Creat Your Sporty Account',
@@ -33,15 +33,26 @@ class SignUpScreen extends StatelessWidget {
                 height: 10,
               ),
               CustomformTextField(
-                hintText: 'E-mail',
-                 label: Text('E-mail'),
+                hintText: 'User Name',
+                label: const Text('User Name'),
+                prefixIcon: const Icon(Icons.person_pin),
               ),
               const SizedBox(
-                height: 5,
+                height: 6,
               ),
               CustomformTextField(
+                hintText: 'E-mail',
+                label: const Text('E-mail'),
+                prefixIcon: const Icon(Icons.email),
+              ),
+              const SizedBox(
+                height: 6,
+              ),
+
+              CustomformTextField(
                 hintText: 'Password',
-                label: Text('Password'),
+                label: const Text('Password'),
+                prefixIcon: const Icon(Icons.password_rounded),
               ),
               const SizedBox(
                 height: 7,
@@ -49,7 +60,21 @@ class SignUpScreen extends StatelessWidget {
               CustomformTextField(
                 hintText: 'confirm your Password',
                 obsecureText: true,
-                label: Text('confirm Password'),
+                label: const Text('confirm Password'),
+                prefixIcon: const Icon(Icons.password_rounded),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: CustomformTextField(
+                  hintText: 'Pick Up your Image',
+                  label: const Text('Photo'),
+                  prefixIcon: GestureDetector(
+                      onTap: () {}, child: const Icon(Icons.photo)),
+                  // suffix:,
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -60,7 +85,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               // ignore: prefer_const_constructors
               SizedBox(
-                height: 5,
+                height: 6,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

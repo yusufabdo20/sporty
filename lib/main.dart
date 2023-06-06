@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:sporty/screens/SignUpScreen/signup_screen.dart';
+import 'package:sporty/screens/login_screen.dart';
+import 'package:sporty/screens/signup_screen.dart';
+import 'package:sporty/screens/spalsh_screen.dart';
 import 'firebase_options.dart';
-void main()async  {
-    WidgetsFlutterBinding.ensureInitialized();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -13,16 +16,18 @@ void main()async  {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-     
-        primarySwatch: Colors.blue,
-      ),
-      home:SignUpScreen(),
+      title: 'Sporty App',
+      home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        LoginScreen.id: (context) => const LoginScreen(),
+        SplashScreen.id: (context) => const SplashScreen(),
+        SignUpScreen.id: (context) => const SignUpScreen(),
+      },
+      initialRoute: SplashScreen.id,
     );
   }
 }

@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         HomeScreen.id: (context) => const HomeScreen(),
         MyProfileScreen.id: (context) => const MyProfileScreen(),
         MyJoinedScreen.id: (context) => const MyJoinedScreen(),
-        
       },
       initialRoute: HomeScreen.id,
     );

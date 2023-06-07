@@ -17,6 +17,7 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 50,),
               Image.asset(
                 'assets/images/logo.png',
                 width: 240,

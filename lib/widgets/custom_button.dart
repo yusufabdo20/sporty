@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({this.onTap, required this.buttonTo});
-  String buttonTo;
+  const CustomButton({super.key, this.onTap, required this.buttonTo});
+  final String buttonTo;
 
-  VoidCallback? onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
             child: Text(
           buttonTo,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
           ),
         )),

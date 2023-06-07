@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sporty/screens/login_screen.dart';
+import 'package:sporty/constanse.dart';
 import 'package:sporty/widgets/custom_button.dart';
 import 'package:sporty/widgets/custom_text_field.dart';
 
@@ -19,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               SizedBox(height: 50,),
               Image.asset(
-                'assets/images/logo.png',
+                klogo,
                 width: 240,
                 // height: 200,
               ),

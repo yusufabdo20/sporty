@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:sporty/constanse.dart';
 import 'package:sporty/screens/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class SplashScreen extends StatelessWidget {
       splash: Column(
         children: [
           Image.asset(
-            'assets/images/logo.png',
+            klogo,
           ),
           const Text(
             'Sporty',

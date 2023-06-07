@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sporty/constanse.dart';
 import 'package:sporty/screens/signup_screen.dart';
 import 'package:sporty/widgets/custom_button.dart';
 import 'package:sporty/widgets/custom_text_field.dart';
@@ -18,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/logo.png',
+                klogo,
                 width: 500,
                 height: 200,
               ),

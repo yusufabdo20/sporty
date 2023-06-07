@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sporty/screens/chat_screen.dart';
 import 'package:sporty/screens/home_screen.dart';
 import 'package:sporty/screens/joined_envent_screen.dart';
 import 'package:sporty/screens/login_screen.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.id: (context) => const HomeScreen(),
         MyProfileScreen.id: (context) => const MyProfileScreen(),
         MyJoinedScreen.id: (context) => const MyJoinedScreen(),
+        ChatScreen.id: (context) => const ChatScreen(),
       },
       initialRoute: HomeScreen.id,
     );

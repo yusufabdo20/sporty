@@ -1,25 +1,17 @@
 import 'package:sporty/models/massage_model.dart';
+import 'package:sporty/models/user_model.dart';
 
 class EventModel {
-  final dynamic id;
-  final String title;
-  final String city;
-  final String date;
-  final String image;
-  final String category;
-  final String user;
-  final MassageModel massage;
+  final String eventName, sportType, city, date;
+  final UserModel users;
+  final MessageModel message;
 
-  EventModel(
-      {required this.id,
-      required this.title,
-      required this.city,
-      required this.date,
-      required this.category,
-      required this.massage,
-      required this.image,
-      required this.user});
-
-  
-
+  EventModel({
+    required this.eventName,
+    required this.sportType,
+    required this.city,
+    required this.date,
+    required this.users,
+    required this.message,
+  });
 }

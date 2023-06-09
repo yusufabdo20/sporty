@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sporty/models/event_model.dart';
 
-class CustomItemEvent extends StatelessWidget {
-  CustomItemEvent({
-    super.key,
-    required this.eventName,
-    required this.sportType,
-    required this.city,
-    required this.date,
-    required this.time,
-  });
-  String eventName;
-  String sportType;
-  String city;
-  String date;
-  String time;
+class JoinedCustomEvent extends StatelessWidget {
+  JoinedCustomEvent({super.key, required this.event, required this.email});
+  EventModel event;
+  String email;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +14,7 @@ class CustomItemEvent extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           border: Border.all(
-            color: Colors.blue,
+            color: const Color.fromARGB(255, 0, 64, 116),
             width: 2.0,
           )),
       child: Column(
@@ -34,16 +25,18 @@ class CustomItemEvent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                eventName,
+                event.eventName,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
-              TextButton(
-                onPressed: () {},
-                child: const Text("Join"),
-              ),
+              event.users.userName == email
+                  ? TextButton(
+                      onPressed: () {},
+                      child: const Text("delete"),
+                    )
+                  : const Text(''),
             ],
           ),
           Row(
@@ -53,7 +46,7 @@ class CustomItemEvent extends StatelessWidget {
                 children: [
                   const Icon(Icons.sports_score_outlined),
                   Text(
-                    sportType,
+                    event.sportType,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
@@ -63,7 +56,7 @@ class CustomItemEvent extends StatelessWidget {
                 children: [
                   const Icon(Icons.location_on_sharp),
                   Text(
-                    city,
+                    event.city,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
@@ -75,13 +68,12 @@ class CustomItemEvent extends StatelessWidget {
                     children: [
                       const Icon(Icons.date_range_rounded),
                       Text(
-                        date,
+                        event.date,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ],
                   ),
-                  Text(time),
                 ],
               ),
             ],

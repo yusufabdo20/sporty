@@ -18,7 +18,9 @@ class AuthServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> registerUser(
-      String name, String email, String password, String imagePath) async {
+      String name, String email, String password, 
+      // String imagePath
+      ) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -31,7 +33,7 @@ class AuthServices {
       await _firestore.collection('users').doc(userId).set({
         'name': name,
         'email': email,
-        'imagePath': imagePath,
+        // 'imagePath': imagePath,
       });
 
       // Registration successful navigate to the home screen.

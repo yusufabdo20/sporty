@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sporty/constanse.dart';
+import 'package:sporty/services/network/authServices.dart';
 import 'package:sporty/widgets/custom_button.dart';
 import 'package:sporty/widgets/custom_text_field.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  SignUpScreen({super.key});
   static String id = 'Signup screen';
-
+  String? name, email, password, password_confirmation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +18,9 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
               Image.asset(
                 klogo,
                 width: 240,
@@ -37,6 +40,9 @@ class SignUpScreen extends StatelessWidget {
                 hintText: 'User Name',
                 label: const Text('User Name'),
                 prefixIcon: const Icon(Icons.person_pin),
+                onChange: (v) {
+                  name = v;
+                },
               ),
               const SizedBox(
                 height: 6,
@@ -45,6 +51,9 @@ class SignUpScreen extends StatelessWidget {
                 hintText: 'E-mail',
                 label: const Text('E-mail'),
                 prefixIcon: const Icon(Icons.email),
+                onChange: (v) {
+                  email = v;
+                },
               ),
               const SizedBox(
                 height: 6,
@@ -54,6 +63,9 @@ class SignUpScreen extends StatelessWidget {
                 hintText: 'Password',
                 label: const Text('Password'),
                 prefixIcon: const Icon(Icons.password_rounded),
+                onChange: (v) {
+                  password = v;
+                },
               ),
               const SizedBox(
                 height: 7,
@@ -63,26 +75,37 @@ class SignUpScreen extends StatelessWidget {
                 obsecureText: true,
                 label: const Text('confirm Password'),
                 prefixIcon: const Icon(Icons.password_rounded),
-                onChange: (value){},
+                onChange: (value) {
+                  if (password != value) {
+                    return "The password isn't correct";
+                  } else {
+                    password_confirmation = value;
+                    return null;
+                  }
+                },
               ),
               const SizedBox(
                 height: 7,
               ),
-              GestureDetector(
-                onTap: () {},
-                child: CustomformTextField(
-                  hintText: 'Pick Up your Image',
-                  label: const Text('Photo'),
-                  prefixIcon: GestureDetector(
-                      onTap: () {}, child: const Icon(Icons.photo)),
-                  // suffix:,
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {},
+              //   child: CustomformTextField(
+              //     hintText: 'Pick Up your Image',
+              //     label: const Text('Photo'),
+              //     prefixIcon: GestureDetector(
+              //         onTap: () {}, child: const Icon(Icons.photo)),
+              //     // suffix:,
+              //   ),
+              // ),
               const SizedBox(
                 height: 10,
               ),
               CustomButton(
-                onTap: () {},
+                onTap: () async {
+                  var userRegiser = await AuthServices()
+                      .registerUser(name!, email!, password_confirmation!);
+                  Navigator.pop(context);
+                },
                 buttonTo: 'Sign up',
               ),
               // ignore: prefer_const_constructors

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sporty/constanse.dart';
+import 'package:sporty/screens/home_screen.dart';
 import 'package:sporty/screens/signup_screen.dart';
+import 'package:sporty/services/network/authServices.dart';
 import 'package:sporty/widgets/custom_button.dart';
 import 'package:sporty/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
   static String id = 'LoginPage';
-
+  String? email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +39,9 @@ class LoginScreen extends StatelessWidget {
                 hintText: 'E-mail',
                 label: Text('E-mail'),
                 prefixIcon: Icon(Icons.email),
+                onChange: (value) {
+                  email = value;
+                },
               ),
               const SizedBox(
                 height: 5,
@@ -46,12 +51,22 @@ class LoginScreen extends StatelessWidget {
                 obsecureText: true,
                 label: Text('Password'),
                 prefixIcon: Icon(Icons.password_rounded),
+                onChange: (value) {
+                  password = value;
+                },
               ),
               const SizedBox(
                 height: 10,
               ),
               CustomButton(
-                onTap: () {},
+                onTap: ()  {
+                  var login_user =  AuthServices()
+                      .loginWithEmailAndPassword(email!, password!)
+                      .then((userCredential) {
+                        Navigator.pushReplacementNamed(context, HomeScreen.id, arguments: email );
+                      })
+                      .catchError((e) {});
+                },
                 buttonTo: 'Sign In',
               ),
               // ignore: prefer_const_constructors

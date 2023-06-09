@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
         ],
       ),
       splashIconSize: 400,
-      nextScreen: const LoginScreen(),
+      nextScreen:  LoginScreen(),
       splashTransition: SplashTransition.slideTransition,
       duration: 3000,
       animationDuration: const Duration(milliseconds: 2000),

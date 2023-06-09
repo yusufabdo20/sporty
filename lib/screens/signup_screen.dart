@@ -63,6 +63,7 @@ class SignUpScreen extends StatelessWidget {
                 obsecureText: true,
                 label: const Text('confirm Password'),
                 prefixIcon: const Icon(Icons.password_rounded),
+                onChange: (value){},
               ),
               const SizedBox(
                 height: 7,

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:sporty/models/event_model.dart';
 
-class JoinedCustomEvent extends StatelessWidget {
-  JoinedCustomEvent({super.key, required this.event, required this.email});
-  EventModel event;
-  String email;
+class CustomJoinedEvent extends StatelessWidget {
+  CustomJoinedEvent({
+    super.key,
+    required this.eventName,
+    required this.sportType,
+    required this.city,
+    required this.date,
+    required this.time,
+  });
+  String eventName;
+  String sportType;
+  String city;
+  String date;
+  String time;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +23,7 @@ class JoinedCustomEvent extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           border: Border.all(
-            color: const Color.fromARGB(255, 0, 64, 116),
+            color: Colors.blue,
             width: 2.0,
           )),
       child: Column(
@@ -25,18 +34,24 @@ class JoinedCustomEvent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                event.eventName,
+                eventName,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
-              event.users.userName == email
-                  ? TextButton(
-                      onPressed: () {},
-                      child: const Text("delete"),
-                    )
-                  : const Text(''),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text("Deleat",style: TextStyle(color: Colors.red),),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text("unjoin",style: TextStyle(color: Colors.greenAccent),),
+                  ),
+                ],
+              ),
             ],
           ),
           Row(
@@ -46,7 +61,7 @@ class JoinedCustomEvent extends StatelessWidget {
                 children: [
                   const Icon(Icons.sports_score_outlined),
                   Text(
-                    event.sportType,
+                    sportType,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
@@ -56,7 +71,7 @@ class JoinedCustomEvent extends StatelessWidget {
                 children: [
                   const Icon(Icons.location_on_sharp),
                   Text(
-                    event.city,
+                    city,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
@@ -68,12 +83,13 @@ class JoinedCustomEvent extends StatelessWidget {
                     children: [
                       const Icon(Icons.date_range_rounded),
                       Text(
-                        event.date,
+                        date,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ],
                   ),
+                  Text(time),
                 ],
               ),
             ],

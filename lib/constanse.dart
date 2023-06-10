@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 
+const kPramairycolor =Colors.blue;
 const klogo = 'assets/images/logo.png';
 
 const kMassagesCollections = 'massages';

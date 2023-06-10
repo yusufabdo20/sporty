@@ -4,5 +4,5 @@ class UserModel {
   final String userImage;
 
 
-  UserModel(this.userName, this.userImage, {required this.userEmail});
+  UserModel({required this.userName,required this.userImage, required this.userEmail});
 }

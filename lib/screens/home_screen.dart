@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sporty/screens/joined_envent_screen.dart';
+import 'package:sporty/screens/profile_screen.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_event_item.dart';
@@ -10,18 +12,96 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('All Events'),
+        centerTitle: true,
+        leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.add,
+            )),
+      ),
       body: SafeArea(
-        child: ListView(
+        child: Column(
           children: [
-            EventItem(
-                eventName: "Event name",
-                sportType: "Sport Type",
-                city: "city",
-                date: "Date of day",
-                time: "Time of day"),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: ListView(
+                  children: [
+                    CustomItemEvent(
+                        eventName: "Event name",
+                        sportType: "Sport Type",
+                        city: "city",
+                        date: "Date of day",
+                        time: "Time of day"),
+                    CustomItemEvent(
+                        eventName: "Event name",
+                        sportType: "Sport Type",
+                        city: "city",
+                        date: "Date of day",
+                        time: "Time of day"),
+                    CustomItemEvent(
+                        eventName: "Event name",
+                        sportType: "Sport Type",
+                        city: "city",
+                        date: "Date of day",
+                        time: "Time of day"),
+                    CustomItemEvent(
+                        eventName: "Event name",
+                        sportType: "Sport Type",
+                        city: "city",
+                        date: "Date of day",
+                        time: "Time of day"),
+                    CustomItemEvent(
+                        eventName: "Event name",
+                        sportType: "Sport Type",
+                        city: "city",
+                        date: "Date of day",
+                        time: "Time of day"),
+                    CustomItemEvent(
+                        eventName: "Event name",
+                        sportType: "Sport Type",
+                        city: "city",
+                        date: "Date of day",
+                        time: "Time of day"),
+                    CustomItemEvent(
+                        eventName: "Event name",
+                        sportType: "Sport Type",
+                        city: "city",
+                        date: "Date of day",
+                        time: "Time of day"),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color.fromARGB(255, 223, 232, 238),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: IconButton(onPressed: () {}, icon: const Icon(Icons.home)),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyJoinedScreen.id);
+                  },
+                  icon: const Icon(Icons.event_available)),
+              label: "My Joined Events",
+            ),
+            BottomNavigationBarItem(
+              icon: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyProfileScreen.id);
+                  },
+                  icon: const Icon(Icons.person)),
+              label: "Profile",
+            ),
+          ]),
     );
   }
 }

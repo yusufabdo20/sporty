@@ -8,12 +8,12 @@ import 'package:sporty/screens/login_screen.dart';
 import 'package:sporty/screens/profile_screen.dart';
 import 'package:sporty/screens/signup_screen.dart';
 import 'package:sporty/screens/spalsh_screen.dart';
-import 'firebase_options.dart';
+// import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    // options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }

@@ -44,42 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAs4xOjqXocZlQjSBGb-aAbGjDPbo7d2wQ',
-    appId: '1:555107589651:web:57e2a6881a707194d569e6',
-    messagingSenderId: '555107589651',
-    projectId: 'sporty-e7c07',
-    authDomain: 'sporty-e7c07.firebaseapp.com',
-    storageBucket: 'sporty-e7c07.appspot.com',
-    measurementId: 'G-N301VBKTX7',
+    apiKey: 'AIzaSyDzUdNHtb60UIvYLjSt-E7D1IVr7MkhrDY',
+    appId: '1:1075481159590:web:deb2b9f787f9ef14d0d167',
+    messagingSenderId: '1075481159590',
+    projectId: 'sporty-5bb17',
+    authDomain: 'sporty-5bb17.firebaseapp.com',
+    storageBucket: 'sporty-5bb17.appspot.com',
+    measurementId: 'G-KPP64K48L7',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDbksEXLRfeWRXhOQSqFUN63p6PH_LnJjU',
-    appId: '1:555107589651:android:cfc3978a724cdfd2d569e6',
-    messagingSenderId: '555107589651',
-    projectId: 'sporty-e7c07',
-    storageBucket: 'sporty-e7c07.appspot.com',
+    apiKey: 'AIzaSyAVzQA4GCrgksvdhj4L7QzD-DhH5kxAYRM',
+    appId: '1:1075481159590:android:8c5a501c7c0f40ddd0d167',
+    messagingSenderId: '1075481159590',
+    projectId: 'sporty-5bb17',
+    storageBucket: 'sporty-5bb17.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD-5iQbYYnavOd2nV7rsH54ZiL3TllmYbY',
-    appId: '1:555107589651:ios:1f25a8631106b361d569e6',
-    messagingSenderId: '555107589651',
-    projectId: 'sporty-e7c07',
-    storageBucket: 'sporty-e7c07.appspot.com',
-    androidClientId: '555107589651-jofh5eo3is4pj37gqc4fj1fa31mgnees.apps.googleusercontent.com',
-    iosClientId: '555107589651-rnddhn2fch6jfrmemlsm1toaapvc7u3r.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBiKR5ldc6XYMHp4mdQQF-uY-GXeVEC3Qo',
+    appId: '1:1075481159590:ios:c6807c0c9b0f3fdad0d167',
+    messagingSenderId: '1075481159590',
+    projectId: 'sporty-5bb17',
+    storageBucket: 'sporty-5bb17.appspot.com',
+    iosClientId: '1075481159590-3a83pst699kavlcjimgvi7lpqbicrdj5.apps.googleusercontent.com',
     iosBundleId: 'com.example.sporty',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyD-5iQbYYnavOd2nV7rsH54ZiL3TllmYbY',
-    appId: '1:555107589651:ios:1f25a8631106b361d569e6',
-    messagingSenderId: '555107589651',
-    projectId: 'sporty-e7c07',
-    storageBucket: 'sporty-e7c07.appspot.com',
-    androidClientId: '555107589651-jofh5eo3is4pj37gqc4fj1fa31mgnees.apps.googleusercontent.com',
-    iosClientId: '555107589651-rnddhn2fch6jfrmemlsm1toaapvc7u3r.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBiKR5ldc6XYMHp4mdQQF-uY-GXeVEC3Qo',
+    appId: '1:1075481159590:ios:c6807c0c9b0f3fdad0d167',
+    messagingSenderId: '1075481159590',
+    projectId: 'sporty-5bb17',
+    storageBucket: 'sporty-5bb17.appspot.com',
+    iosClientId: '1075481159590-3a83pst699kavlcjimgvi7lpqbicrdj5.apps.googleusercontent.com',
     iosBundleId: 'com.example.sporty',
   );
 }

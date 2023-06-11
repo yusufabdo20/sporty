@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sporty/screens/create_event_sceen.dart';
 import 'package:sporty/screens/joined_envent_screen.dart';
 import 'package:sporty/screens/profile_screen.dart';
 
-import '../widgets/custom_button.dart';
 import '../widgets/custom_event_item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,12 +11,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Events'),
         centerTitle: true,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, CreateEventScreen.id,
+                  arguments: email);
+            },
             icon: const Icon(
               Icons.add,
             )),
@@ -88,7 +92,8 @@ class HomeScreen extends StatelessWidget {
             BottomNavigationBarItem(
               icon: IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, MyJoinedScreen.id);
+                    Navigator.pushNamed(context, MyJoinedScreen.id,
+                        arguments: email);
                   },
                   icon: const Icon(Icons.event_available)),
               label: "My Joined Events",
@@ -96,7 +101,8 @@ class HomeScreen extends StatelessWidget {
             BottomNavigationBarItem(
               icon: IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, MyProfileScreen.id);
+                    Navigator.pushNamed(context, MyProfileScreen.id,
+                        arguments: email);
                   },
                   icon: const Icon(Icons.person)),
               label: "Profile",

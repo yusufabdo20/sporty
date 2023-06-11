@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sporty/constanse.dart';
-import 'package:sporty/cubit/chat_cubit/chat_cubit.dart';
+import 'package:sporty/cubit/Event_cubit/event_cubit.dart';
 import 'package:sporty/models/massage_model.dart';
 import 'package:sporty/widgets/chat_buble.dart';
 
@@ -19,27 +19,18 @@ class ChatScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         backgroundColor: kPramairycolor,
         centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              klogo,
-              width: 60,
-            ),
-            const Text('Event Chat'),
-          ],
-        ),
+        title: Text('Event Chat'),
       ),
       body: Column(
         children: [
           Expanded(
-            child: BlocConsumer<ChatCubit, ChatState>(
+            child: BlocConsumer<EventCubit, ChatState>(
               listener: (context, state) {
-                if (state is ChatSuccess) {
-                  messagesList = state.messages;
+                if (state is EventSuccess) {
+                  messagesList = state.event;
                 }
               },
               builder: (context, state) {
@@ -63,7 +54,7 @@ class ChatScreen extends StatelessWidget {
             child: TextField(
               controller: controller,
               onSubmitted: (data) {
-                BlocProvider.of<ChatCubit>(context)
+                BlocProvider.of<EventCubit>(context)
                     .sendMessage(message: data, email: email.toString());
                 controller.clear();
                 _controllar.animateTo(0,

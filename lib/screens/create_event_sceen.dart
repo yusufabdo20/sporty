@@ -25,7 +25,7 @@ class CreateEventScreen extends StatelessWidget {
               height: 20,
             ),
             CustomformTextField(
-              label: Text('Event date'),
+              label: Text(DateTime.now().toString()),
               prefixIcon: Icon(Icons.date_range),
             ),
             SizedBox(

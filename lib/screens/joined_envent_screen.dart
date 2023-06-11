@@ -8,6 +8,7 @@ class MyJoinedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('My Joined Event'),
@@ -23,7 +24,8 @@ class MyJoinedScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, ChatScreen.id);
+                        Navigator.pushNamed(context, ChatScreen.id,
+                            arguments: email);
                       },
                       child: CustomJoinedEvent(
                           eventName: "Event name",

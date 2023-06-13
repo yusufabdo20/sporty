@@ -7,13 +7,13 @@ class CustomJoinedEvent extends StatelessWidget {
     required this.sportType,
     required this.city,
     required this.date,
-    required this.time,
+    required this.onPressed,
   });
   String eventName;
   String sportType;
   String city;
   String date;
-  String time;
+  void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +40,12 @@ class CustomJoinedEvent extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text("Deleat",style: TextStyle(color: Colors.red),),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text("unjoin",style: TextStyle(color: Colors.greenAccent),),
-                  ),
-                ],
+              TextButton(
+                onPressed: onPressed,
+                child: const Text(
+                  "Deleat",
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
             ],
           ),
@@ -77,19 +72,14 @@ class CustomJoinedEvent extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.date_range_rounded),
-                      Text(
-                        date,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                    ],
+                  const Icon(Icons.date_range_rounded),
+                  Text(
+                    date,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(time),
                 ],
               ),
             ],

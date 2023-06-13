@@ -6,6 +6,7 @@ import 'package:sporty/cubit/auth_cubit/auth_cubit.dart';
 import 'package:sporty/helper/show-snack-bar.dart';
 import 'package:sporty/services/network/authServices.dart';
 import 'package:sporty/widgets/custom_button.dart';
+import 'package:sporty/widgets/custom_image_list.dart';
 import 'package:sporty/widgets/custom_text_field.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -37,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Image.asset(
@@ -103,13 +104,16 @@ class SignUpScreen extends StatelessWidget {
                       }
                     },
                   ),
+                  const ImagesListView(),
                   const SizedBox(
                     height: 10,
                   ),
                   CustomButton(
                     onTap: () async {
-                      BlocProvider.of<AuthCubit>(context)
-                          .registerUser(email: email!, password: password_confirmation!, name: name!);
+                      BlocProvider.of<AuthCubit>(context).registerUser(
+                          email: email!,
+                          password: password_confirmation!,
+                          name: name!, );
                       Navigator.pop(context);
                     },
                     buttonTo: 'Sign up',

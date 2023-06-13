@@ -1,11 +1,18 @@
 part of 'event_cubit.dart';
 
 @immutable
-abstract class ChatState {}
+abstract class EventState {}
 
-class EventInitial extends ChatState {}
+class EventInitial extends EventState {}
 
-class EventSuccess extends ChatState {
-  List<EventModel> event;
-  EventSuccess({required this.event});
+class EventLoading extends EventState {}
+
+class EventFailure extends EventState {}
+
+class EventSuccess extends EventState {}
+
+class EventSuccessWithList extends EventState {
+  List<EventsModel> events = [];
+
+  EventSuccessWithList(List<Map<String, dynamic>> allEvents);
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sporty/cubit/Event_cubit/event_cubit.dart';
 import 'package:sporty/cubit/auth_cubit/auth_cubit.dart';
+import 'package:sporty/cubit/event_cubit/event_cubit.dart';
+import 'package:sporty/cubit/message_cubit/message_cubit.dart';
+import 'package:sporty/cubit/user_cubit/user_cubit.dart';
 import 'package:sporty/screens/chat_screen.dart';
 import 'package:sporty/screens/create_event_sceen.dart';
 import 'package:sporty/screens/home_screen.dart';
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => EventCubit()),
           BlocProvider(create: (context) => AuthCubit()),
+          BlocProvider(create: (context) => UserCubit()),
+          BlocProvider(create: (context) => MessageCubit()),
         ],
         child: MaterialApp(
           title: 'Sporty App',
@@ -39,11 +43,11 @@ class MyApp extends StatelessWidget {
             SplashScreen.id: (context) => const SplashScreen(),
             LoginScreen.id: (context) => LoginScreen(),
             SignUpScreen.id: (context) => SignUpScreen(),
-            HomeScreen.id: (context) => const HomeScreen(),
-            MyProfileScreen.id: (context) => const MyProfileScreen(),
-            MyJoinedScreen.id: (context) => const MyJoinedScreen(),
+            HomeScreen.id: (context) => HomeScreen(),
+            MyProfileScreen.id: (context) => MyProfileScreen(),
+            MyJoinedScreen.id: (context) => MyJoinedScreen(),
             ChatScreen.id: (context) => ChatScreen(),
-            CreateEventScreen.id: (context) => const CreateEventScreen(),
+            CreateEventScreen.id: (context) => CreateEventScreen(),
           },
           initialRoute: SplashScreen.id,
         ));

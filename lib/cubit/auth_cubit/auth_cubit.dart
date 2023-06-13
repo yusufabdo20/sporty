@@ -7,6 +7,7 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
+  String image= '';
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<void> loginUser(
       {required String email, required String password}) async {
@@ -27,7 +28,9 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> registerUser(
-      {required String email, required String password ,required String name}) async {
+      {required String email,
+      required String password,
+      required String name}) async {
     emit(RegistrLoading());
     try {
       UserCredential user = await FirebaseAuth.instance
@@ -36,7 +39,7 @@ class AuthCubit extends Cubit<AuthState> {
       await _firestore.collection('users').doc(userId).set({
         'name': name,
         'email': email,
-        // 'imagePath': imagePath,
+        'userImage': image,
       });
       emit(RegistrSuccess());
     } on FirebaseAuthException catch (e) {

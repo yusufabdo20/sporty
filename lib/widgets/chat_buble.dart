@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:sporty/models/massage_model.dart';
 
 class ChatBubel extends StatelessWidget {
-  ChatBubel({super.key, required this.massage});
+  ChatBubel({super.key, required this.massage, required this.email});
   final MessageModel massage;
+  final String email;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -28,11 +28,26 @@ class ChatBubel extends StatelessWidget {
           ),
           color: Color.fromARGB(255, 68, 137, 255),
         ),
-        child: Text(
-          massage.message,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
+        child: Column(
+          children: [
+            Text(
+              massage.message,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  email,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
@@ -40,8 +55,9 @@ class ChatBubel extends StatelessWidget {
 }
 
 class ChatBubelFriend extends StatelessWidget {
-  ChatBubelFriend({super.key, required this.massage});
+  ChatBubelFriend({super.key, required this.massage, required this.email});
   final MessageModel massage;
+   final String email;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -65,11 +81,26 @@ class ChatBubelFriend extends StatelessWidget {
           ),
           color: Color.fromARGB(255, 117, 192, 226),
         ),
-        child: Text(
-          massage.message,
-          style: const TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
+        child: Column(
+          children: [
+            Text(
+              massage.message,
+              style: const TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  email,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

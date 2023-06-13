@@ -7,13 +7,13 @@ class CustomItemEvent extends StatelessWidget {
     required this.sportType,
     required this.city,
     required this.date,
-    required this.time,
+    required this.onPressed,
   });
   String eventName;
   String sportType;
   String city;
   String date;
-  String time;
+  void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class CustomItemEvent extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: onPressed,
                 child: const Text("Join"),
               ),
             ],
@@ -81,7 +81,6 @@ class CustomItemEvent extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(time),
                 ],
               ),
             ],

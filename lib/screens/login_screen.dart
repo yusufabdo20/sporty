@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sporty/constanse.dart';
-import 'package:sporty/cubit/Event_cubit/event_cubit.dart';
 import 'package:sporty/cubit/auth_cubit/auth_cubit.dart';
 import 'package:sporty/helper/show-snack-bar.dart';
 import 'package:sporty/screens/home_screen.dart';
@@ -23,16 +22,15 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
-        } else if (state is LoginSuccess) {
-          BlocProvider.of<EventCubit>(context).getMessages();
-          Navigator.pushNamed(context, HomeScreen.id);
+        } else if (state is LoginSuccess)  {
+          Navigator.pushNamed(context, HomeScreen.id,arguments: email);
           isLoading = false;
         } else if (state is LoginFailure) {
           scafoldmassage(context, state.errMassage);
           isLoading = false;
         }
       },
-      builder: (context, State) => ModalProgressHUD(
+      builder: (context, state) => ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -87,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                         onTap: () {
                           BlocProvider.of<AuthCubit>(context)
                               .loginUser(email: email!, password: password!);
-                          // Navigator.pushNamed(context,HomeScreen.id,arguments: email!);
+                          Navigator.pushNamed(context,HomeScreen.id,arguments: email!);
                         },
                         buttonTo: 'Sign In',
                       ),

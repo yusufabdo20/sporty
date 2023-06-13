@@ -10,9 +10,9 @@ class UserLoading extends UserState {}
 class UserSuccess extends UserState {}
 
 class UserSuccessWithList extends UserState {
-  List<UserModel> user = [];
+  List<UserModel> users = [];
 
-  UserSuccessWithList(List<Map<String, dynamic>> user);
+  UserSuccessWithList( {required List<UserModel> users});
 }
 
 class UserFailure extends UserState {}

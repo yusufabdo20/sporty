@@ -13,11 +13,8 @@ import 'package:sporty/widgets/custom_joined_event.dart';
 class MyJoinedScreen extends StatelessWidget {
   MyJoinedScreen({super.key});
   static String id = 'MyJoinedScreen';
-  bool isLoading =false;
+  bool isLoading = false;
   List<EventsModel> eventsList = [];
-  List<MessageModel> massageList = [];
-  List<UserModel> userList = [];
-
   @override
   Widget build(BuildContext context) {
     dynamic email = ModalRoute.of(context)!.settings.arguments;
@@ -29,13 +26,20 @@ class MyJoinedScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+             CustomJoinedEvent(
+              eventName: "Sports Start",
+              sportType: "Football",
+              city: "Maadie",
+              date: "Monday",
+              onPressed: () {},
+            ),
             Expanded(
               child: BlocConsumer<EventCubit, EventState>(
                 listener: (context, state) {
                   if (state is EventLoading) {
                     isLoading = true;
                   } else if (state is EventSuccessWithList) {
-                    eventsList = state.events;
+                    eventsList = state.allEvents;
                     isLoading = false;
                   } else if (state is EventFailure) {
                     scafoldmassage(context, 'have an erorr');
@@ -48,47 +52,64 @@ class MyJoinedScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: ListView.builder(
+                        itemCount: eventsList.length,
                         itemBuilder: (context, index) {
-                          if (eventsList[index].users.userEmail == email) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  ChatScreen.id,
-                                  arguments: {
-                                    'email': email,
-                                    'messageList': eventsList[index].messages,
-                                    'eventId': eventsList[index].eventId,
-                                  },
-                                );
-                              },
-                              child: CustomJoinedEvent(
-                                eventName: eventsList[index].eventName,
-                                sportType: eventsList[index].sportType,
-                                city: eventsList[index].city,
-                                date: eventsList[index].date,
-                                onPressed: () {
-                                  if (eventsList[index].users.userAdmin) {
-                                    BlocProvider.of<EventCubit>(context) //
-                                        .deleteEvent(eventsList[index].eventId);
-                                  } else {
-                                    scafoldmassage(context,
-                                        'to delete this event you must be Event Admin and you aren\'t');
-                                  }
-                                },
-                              ),
-                            );
-                          } else {
-                            return const Center();
+                          EventsModel event = eventsList[index];
+                          bool joined = true;
+                          for (var userEmail in event.users) {
+                            if (userEmail == email) {
+                              joined = false;
+                              break;
+                            }
                           }
+                          return !joined
+                              ? GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      ChatScreen.id,
+                                      arguments: {
+                                        'email': email,
+                                        'messageList':
+                                            eventsList[index].messages,
+                                        'eventId': eventsList[index].eventId,
+                                      },
+                                    );
+                                  },
+                                  child: CustomJoinedEvent(
+                                      eventName: eventsList[index].eventName,
+                                      sportType: eventsList[index].sportType,
+                                      city: eventsList[index].city,
+                                      date: eventsList[index].date,
+                                      onPressed: () {
+                                        if (true) {
+                                          BlocProvider.of<EventCubit>(
+                                                  context) //
+                                              .deleteEvent(
+                                                  eventsList[index].eventId);
+                                          // } else(false) {
+                                          //   scafoldmassage(context,
+                                          //       'to delete this event you must be Event Admin and you aren\'t');
+                                          // }
+                                        }
+                                        ;
+                                      }),
+                                )
+                              : CustomItemEvent(
+                                  eventName: "Event name",
+                                  sportType: "Sport Type",
+                                  city: "city",
+                                  date: "Date of day",
+                                  onPressed: () {},
+                                );
                         },
-                        // children: [
-                        //   CustomItemEvent(
-                        //       eventName: "Event name",
-                        //       sportType: "Sport Type",
-                        //       city: "city",
-                        //       date: "Date of day",
-                        //       time: "Time of day"),
+
+                        // CustomItemEvent(
+                        //     eventName: "Event name",
+                        //     sportType: "Sport Type",
+                        //     city: "city",
+                        //     date: "Date of day",
+                        //     time: "Time of day"),
                         //   CustomItemEvent(
                         //       eventName: "Event name",
                         //       sportType: "Sport Type",

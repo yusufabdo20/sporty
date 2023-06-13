@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   bool isLoading = false;
   static String id = 'homeScreen';
   List<EventsModel> eventsList = [];
-  List<UserModel> usersList = [];
+  // List<UserModel> usersList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +39,20 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            CustomItemEvent(
+              eventName: "Sports Start",
+              sportType: "Football",
+              city: "Maadie",
+              date: "Moday",
+              onPressed: () {},
+            ),
             Expanded(
               child: BlocConsumer<EventCubit, EventState>(
                 listener: (context, state) {
                   if (state is EventLoading) {
                     isLoading = true;
                   } else if (state is EventSuccessWithList) {
-                    eventsList = state.events;
+                    eventsList = state.allEvents;
                     isLoading = false;
                   } else if (state is EventFailure) {
                     scafoldmassage(context, 'have an erorr');
@@ -54,30 +61,45 @@ class HomeScreen extends StatelessWidget {
                 },
                 builder: (context, state) {
                   return ModalProgressHUD(
-                    inAsyncCall: isLoading, child: Padding(
+                    inAsyncCall: isLoading,
+                    child: Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: ListView.builder(
                         itemCount: eventsList.length,
                         itemBuilder: (context, index) {
                           EventsModel event = eventsList[index];
-                          if (eventsList[index].users.userEmail != email) {
-                            return CustomItemEvent(
-                              eventName: event.eventName,
-                              sportType: event.sportType,
-                              city: event.city,
-                              date: event.date,
-                              onPressed: () {
-                                BlocProvider.of<UserCubit>(context)
-                                    .addUserToEvent(
-                                  userEmail: email,
-                                  userAdmin: false,
-                                  eventId: event.eventId,
-                                );
-                              },
-                            );
-                          } else {
-                            return const Center();
+                          bool joined = false;
+                          for (var userEmail in event.users) {
+                            if (userEmail == email) {
+                              joined = true;
+                              break;
+                            }
                           }
+                          return !joined
+                              ? CustomItemEvent(
+                                  eventName: event.eventName,
+                                  sportType: event.sportType,
+                                  city: event.city,
+                                  date: event.date,
+                                  onPressed: () {
+                                    BlocProvider.of<UserCubit>(context)
+                                        .addUserToEvent(
+                                      userEmail: email,
+                                      userAdmin: false,
+                                      eventId: event.eventId,
+                                    );
+                                  },
+                                )
+                              : CustomItemEvent(
+                                  eventName: event.eventName,
+                                  sportType: event.sportType,
+                                  city: event.city,
+                                  date: event.date,
+                                  onPressed: () {
+                                    scafoldmassage(
+                                        context, 'your are already Joined');
+                                  },
+                                );
                         },
                       ),
                     ),
@@ -111,6 +133,7 @@ class HomeScreen extends StatelessWidget {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () async {
+                BlocProvider.of<UserCubit>(context).getUser(email);
                 Navigator.pushNamed(context, MyProfileScreen.id,
                     arguments: email);
               },

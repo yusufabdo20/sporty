@@ -10,7 +10,7 @@ class MyProfileScreen extends StatelessWidget {
   MyProfileScreen({super.key});
   static String id = 'MyProfileScreen';
   bool isLoading = false;
-  List<UserModel> user =[];
+  List<UserModel> user = [];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class MyProfileScreen extends StatelessWidget {
           if (state is UserLoading) {
             isLoading = true;
           } else if (state is UserSuccessWithList) {
-            user=state.user;
+            user = state.users;
             isLoading = false;
           } else if (state is UserFailure) {
             scafoldmassage(context, 'have an erorr');
@@ -39,6 +39,68 @@ class MyProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                CircleAvatar(
+                  radius: 102,
+                  backgroundColor: const Color.fromARGB(255, 83, 81, 81),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 101,
+                    child: Image(image: AssetImage(images[1])),
+                  ),
+                ),
+                Text(
+                  user[0].userName,
+                  style: const TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+                const Text(
+                  'Welcome Back',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const Divider(
+                  thickness: 1,
+                  indent: 70,
+                  endIndent: 70,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    height: 65,
+                    child: const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 10, left: 10),
+                          child: Icon(
+                            Icons.email,
+                            size: 34,
+                            color: Color.fromARGB(255, 15, 13, 13),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 22,
+                            right: 20,
+                          ),
+                          child: Text(
+                            'Ali@mail.com',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 CircleAvatar(
                   radius: 102,
                   backgroundColor: const Color.fromARGB(255, 83, 81, 81),

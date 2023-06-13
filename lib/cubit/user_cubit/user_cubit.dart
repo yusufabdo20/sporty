@@ -34,20 +34,24 @@ class UserCubit extends Cubit<UserState> {
   }
 
   void getUser(String email) async {
-    QuerySnapshot usersSnapshot =
-        await FirebaseFirestore.instance.collection('users').get();
-    emit(UserLoading());
-    try {
-      List<DocumentSnapshot> matchingUsers =
-          usersSnapshot.docs.where((docSnapshot) {
-        Map<String, dynamic>? userData =
-            docSnapshot.data() as Map<String, dynamic>?;
-        String userEmail = userData?['userEmail'];
-        return userEmail == email;
-      }).toList();
-      emit(UserSuccessWithList(matchingUsers.cast<Map<String, dynamic>>()));
-    } catch (e) {
-      emit(UserFailure());
-    }
+  QuerySnapshot usersSnapshot =
+      await FirebaseFirestore.instance.collection('users').get();
+  emit(UserLoading());
+  try {
+    List<DocumentSnapshot> matchingUsers = usersSnapshot.docs
+        .where((docSnapshot) {
+          Map<String, dynamic>? userData =
+              docSnapshot.data() as Map<String, dynamic>?;
+          String userEmail = userData?['userEmail'];
+          return userEmail == email;
+        })
+        .toList();
+
+    List<UserModel> users = UserModel.fromJsonList(matchingUsers);
+
+    emit(UserSuccessWithList(users: users));
+  } catch (e) {
+    emit(UserFailure());
   }
+}
 }

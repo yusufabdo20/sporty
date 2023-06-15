@@ -85,11 +85,12 @@ class LoginScreen extends StatelessWidget {
                         height: 10,
                       ),
                       CustomButton(
-                        onTap: () {
+                        onTap: () async {
+                          if(formKey.currentState!.validate()){
                           BlocProvider.of<AuthCubit>(context)
                               .loginUser(email: email!, password: password!);
                           Navigator.pushNamed(context, HomeScreen.id,
-                              arguments: email!);
+                              arguments: email!);}else{}
                         },
                         buttonTo: 'Sign In',
                       ),

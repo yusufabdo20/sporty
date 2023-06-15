@@ -15,6 +15,7 @@ class MyJoinedScreen extends StatelessWidget {
   static String id = 'MyJoinedScreen';
   bool isLoading = false;
   List<EventsModel> eventsList = [];
+  List<UserModel> userList = [];
   @override
   Widget build(BuildContext context) {
     dynamic email = ModalRoute.of(context)!.settings.arguments;
@@ -26,19 +27,21 @@ class MyJoinedScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-             CustomJoinedEvent(
-              eventName: "Sports Start",
-              sportType: "Football",
-              city: "Maadie",
-              date: "Monday",
-              onPressed: () {},
+            CustomJoinedEvent(
+              eventName: "Running",
+              sportType: "run",
+              city: "Helwan",
+              date: "Sunday",
+              onPressed: () {
+                Navigator.pushNamed(context, ChatScreen.id);
+              },
             ),
             Expanded(
               child: BlocConsumer<EventCubit, EventState>(
                 listener: (context, state) {
                   if (state is EventLoading) {
                     isLoading = true;
-                  } else if (state is EventSuccessWithList) {
+                  } else if (state is EventSuccessGitEvent) {
                     eventsList = state.allEvents;
                     isLoading = false;
                   } else if (state is EventFailure) {
@@ -55,8 +58,9 @@ class MyJoinedScreen extends StatelessWidget {
                         itemCount: eventsList.length,
                         itemBuilder: (context, index) {
                           EventsModel event = eventsList[index];
+                         
                           bool joined = true;
-                          for (var userEmail in event.users) {
+                          for (var userEmail in userList) {
                             if (userEmail == email) {
                               joined = false;
                               break;
@@ -92,7 +96,6 @@ class MyJoinedScreen extends StatelessWidget {
                                           //       'to delete this event you must be Event Admin and you aren\'t');
                                           // }
                                         }
-                                        ;
                                       }),
                                 )
                               : CustomItemEvent(

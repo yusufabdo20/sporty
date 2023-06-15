@@ -28,7 +28,6 @@ class MessageCubit extends Cubit<MessageState> {
       emit(MessageSuccess());
     } catch (e) {
           emit(MessageFaiulre());
-;
     }
   }
 }

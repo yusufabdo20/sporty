@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   static String id = 'homeScreen';
   List<EventsModel> eventsList = [];
   // List<UserModel> usersList = [];
+  List<UserModel> userList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +40,35 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CustomItemEvent(
-              eventName: "Sports Start",
-              sportType: "Football",
-              city: "Maadie",
-              date: "Moday",
-              onPressed: () {},
+            Padding(
+            padding: const EdgeInsets.all(12),
+            child: TextField(
+              onSubmitted: (data) {
+              },
+              decoration: InputDecoration(
+                  hintText: 'Search',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                    },
+                    color: kPramairycolor,
+                    icon: const Icon(Icons.search),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: kPramairycolor,
+                      ))),
             ),
+          ),
             Expanded(
               child: BlocConsumer<EventCubit, EventState>(
                 listener: (context, state) {
-                  if (state is EventLoading) {
+                   if (state is EventLoading) {
                     isLoading = true;
-                  } else if (state is EventSuccessWithList) {
+                  } else if (state is EventSuccessGitEvent) {
                     eventsList = state.allEvents;
                     isLoading = false;
                   } else if (state is EventFailure) {
@@ -68,8 +85,9 @@ class HomeScreen extends StatelessWidget {
                         itemCount: eventsList.length,
                         itemBuilder: (context, index) {
                           EventsModel event = eventsList[index];
+  
                           bool joined = false;
-                          for (var userEmail in event.users) {
+                          for (var userEmail in userList) {
                             if (userEmail == email) {
                               joined = true;
                               break;
@@ -126,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, MyJoinedScreen.id,
                     arguments: email);
               },
-              icon: const Icon(Icons.event_available),
+              icon: const Icon(Icons.chat_bubble_outline_rounded),
             ),
             label: 'My Joined Events',
           ),

@@ -4,8 +4,8 @@ import 'package:sporty/models/user_model.dart';
 class EventsModel {
   final String eventName, sportType, city, date;
   String eventId;
-  List<UserModel> users;
-  List<MessageModel>? messages = [];
+  List<UserModel>? users;
+  List<MessageModel>? messages;
 
   EventsModel(
       {this.messages,
@@ -14,16 +14,19 @@ class EventsModel {
       required this.sportType,
       required this.city,
       required this.date,
-      required this.users});
+       this.users});
 
   factory EventsModel.fromJson(Map<String, dynamic> jsonData) {
+    print('moooooooooooo');
     return EventsModel(
       eventName: jsonData['eventName'],
       sportType: jsonData['sportType'],
-      date: jsonData['date'],
+      date: 'monday',
       city: jsonData['city'],
-      messages: MessageModel.fromJsonList(jsonData['messages']),
-      users: UserModel.fromJsonList(jsonData['users']),
+      // messages: jsonData['messages']!=null ? MessageModel.fromJsonList(jsonData['messages']) : [],
+      // users: [UserModel.fromJsonList(jsonData['users'])],
+      // users: [],
+      // eventId: '23',
       eventId: jsonData['eventId'],
     );
   }

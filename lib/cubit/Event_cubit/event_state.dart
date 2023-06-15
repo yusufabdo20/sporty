@@ -11,8 +11,20 @@ class EventFailure extends EventState {}
 
 class EventSuccess extends EventState {}
 
-class EventSuccessWithList extends EventState {
-  List<EventsModel> events = [];
+class EventSuccessGitEvent extends EventState {
+  List<EventsModel> allEvents;
 
-  EventSuccessWithList(List<Map<String, dynamic>> allEvents);
+  EventSuccessGitEvent({required this.allEvents});
 }
+
+// class EventSuccessGitEventUsers extends EventState {
+//   List<UserModel> allEventsUsers;
+
+//   EventSuccessGitEventUsers({required this.allEventsUsers});
+// }
+
+// class EventSuccessGitEventMessages extends EventState {
+//   List<MessageModel> allEventsMessages;
+
+//   EventSuccessGitEventMessages({required this.allEventsMessages});
+// }

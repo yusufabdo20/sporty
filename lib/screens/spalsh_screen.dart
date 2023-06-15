@@ -16,13 +16,13 @@ class SplashScreen extends StatelessWidget {
             klogo,
           ),
           const Text(
-            'Sporty',
-            style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),
+            'Let\'s Sport',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           )
         ],
       ),
       splashIconSize: 400,
-      nextScreen:  LoginScreen(),
+      nextScreen: LoginScreen(),
       splashTransition: SplashTransition.slideTransition,
       duration: 3000,
       animationDuration: const Duration(milliseconds: 2000),

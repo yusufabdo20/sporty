@@ -17,13 +17,21 @@ class DateList extends StatelessWidget {
               radius: 28,
               child: Text(
                 day,
-                style: const TextStyle(fontSize: 10, color: Colors.black),
+                style: const TextStyle(fontSize: 10, color: Color.fromARGB(255, 250, 248, 248)),
               ),
             ),
           )
-        : const CircleAvatar(
-            backgroundColor: Color.fromARGB(255, 179, 191, 231),
+        : CircleAvatar(
+            backgroundColor: Color.fromARGB(255, 141, 152, 185),
             radius: 32,
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 141, 152, 185),
+              radius: 32,
+              child: Text(
+                day,
+                style: const TextStyle(fontSize: 10, color: Colors.black),
+              ),
+            ),
           );
   }
 }

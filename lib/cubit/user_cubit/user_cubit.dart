@@ -33,25 +33,43 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
+  // Future<UserModel?> getUser(String email) async {
+  //   QuerySnapshot usersSnapshot = await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .where('userEmail', isEqualTo: email)
+  //       .get();
+
+  //   if (usersSnapshot.docs.isNotEmpty) {
+  //     // Assuming there's only one user with the given email
+  //     var userData = usersSnapshot.docs[0].data();
+  //     return UserModel(
+  //       userEmail: userData['userEmail'], userName: userData['userName'],
+  //       userImage: userData['userImage'],
+  //       // Add other required properties
+  //     );
+  //   }
+
+  //   return null; // Return null if no user found
+  // }
+
   void getUser(String email) async {
-  QuerySnapshot usersSnapshot =
-      await FirebaseFirestore.instance.collection('users').get();
-  emit(UserLoading());
-  try {
-    List<DocumentSnapshot> matchingUsers = usersSnapshot.docs
-        .where((docSnapshot) {
-          Map<String, dynamic>? userData =
-              docSnapshot.data() as Map<String, dynamic>?;
-          String userEmail = userData?['userEmail'];
-          return userEmail == email;
-        })
-        .toList();
+    QuerySnapshot usersSnapshot =
+        await FirebaseFirestore.instance.collection('users').get();
+    emit(UserLoading());
+    try {
+      List<DocumentSnapshot> matchingUsers =
+          usersSnapshot.docs.where((docSnapshot) {
+        Map<String, dynamic>? userData =
+            docSnapshot.data() as Map<String, dynamic>?;
+        String userEmail = userData?['userEmail'];
+        return userEmail == email;
+      }).toList();
 
-    List<UserModel> users = UserModel.fromJsonList(matchingUsers);
+      List<UserModel> users = UserModel.fromJson(matchingUsers as Map<String, dynamic>) as List<UserModel>;
 
-    emit(UserSuccessWithList(users: users));
-  } catch (e) {
-    emit(UserFailure());
+      emit(UserSuccessWithList(users: users));
+    } catch (e) {
+      emit(UserFailure());
+    }
   }
-}
 }

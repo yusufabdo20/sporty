@@ -14,16 +14,25 @@ class CityList extends StatelessWidget {
             radius: 32,
             backgroundColor: Colors.white,
             child: CircleAvatar(
+              radius: 28,
+              child: Text(
+                city,
+                style: const TextStyle(
+                    fontSize: 10, color: Color.fromARGB(255, 247, 247, 247)),
+              ),
+            ),
+          )
+        : CircleAvatar(
+            backgroundColor: Color.fromARGB(255, 179, 191, 231),
+            radius: 32,
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 179, 191, 231),
+              radius: 32,
               child: Text(
                 city,
                 style: const TextStyle(fontSize: 10, color: Colors.black),
               ),
-              radius: 28,
             ),
-          )
-        : const CircleAvatar(
-            backgroundColor: Color.fromARGB(255, 179, 191, 231),
-            radius: 32,
           );
   }
 }

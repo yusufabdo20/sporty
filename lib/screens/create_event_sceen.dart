@@ -7,6 +7,7 @@ import 'package:sporty/cubit/event_cubit/event_cubit.dart';
 import 'package:sporty/models/user_model.dart';
 import 'package:sporty/widgets/custom_button.dart';
 import 'package:sporty/widgets/custom_city_list.dart';
+import 'package:sporty/widgets/custom_date_list.dart';
 import 'package:sporty/widgets/custom_text_field.dart';
 
 class CreateEventScreen extends StatefulWidget {
@@ -62,8 +63,9 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               ),
               const CityListView(),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
+              const DateListView(),
               const SizedBox(
                 height: 10,
               ),

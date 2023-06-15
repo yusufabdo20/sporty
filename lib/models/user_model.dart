@@ -1,28 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserModel {
   final String userEmail;
   final String userName;
-  final String userImage;
-  bool userAdmin = false;
+  String? userImage;
+  bool userAdmin;
 
   UserModel({
     required this.userName,
-    required this.userImage,
+    this.userImage,
+    required this.userAdmin,
     required this.userEmail,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> jsonData) {
     return UserModel(
       userName: jsonData['userName'],
-      userImage: jsonData['userImage'],
+      userImage: jsonData['userImage'] == null ? '' : jsonData['userImage'] ,
       userEmail: jsonData['userEmail'],
+      userAdmin: jsonData['userAdmin'] == false ? false : true,
     );
-  }
-
-  static List<UserModel> fromJsonList(List<DocumentSnapshot> documentList) {
-    return documentList
-        .map((document) => UserModel.fromJson(document.data() as Map<String, dynamic>))
-        .toList();
   }
 }

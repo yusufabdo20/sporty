@@ -13,7 +13,8 @@ import 'package:sporty/widgets/custom_text_field.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   static String id = 'LoginPage';
-  String? email, password;
+  String? password;
+  late String email = '';
   bool isLoading = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
@@ -24,8 +25,7 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
-          print('maopcjsiofcjaklsc;hz    moooooooooo');
-          BlocProvider.of<EventCubit>(context).getEvents();
+          print('moooooooooooooooooooooo');
           Navigator.pushNamed(context, HomeScreen.id, arguments: email);
           isLoading = false;
         } else if (state is LoginFailure) {
@@ -86,11 +86,10 @@ class LoginScreen extends StatelessWidget {
                       ),
                       CustomButton(
                         onTap: () async {
-                          if(formKey.currentState!.validate()){
-                          BlocProvider.of<AuthCubit>(context)
-                              .loginUser(email: email!, password: password!);
-                          Navigator.pushNamed(context, HomeScreen.id,
-                              arguments: email!);}else{}
+                          if (formKey.currentState!.validate()) {
+                            BlocProvider.of<AuthCubit>(context)
+                                .loginUser(email: email!, password: password!);
+                          } else {}
                         },
                         buttonTo: 'Sign In',
                       ),

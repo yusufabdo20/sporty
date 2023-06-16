@@ -3,27 +3,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sporty/constanse.dart';
 import 'package:sporty/cubit/event_cubit/event_cubit.dart';
-import 'package:sporty/cubit/user_cubit/user_cubit.dart';
-import 'package:sporty/helper/show-snack-bar.dart';
-import 'package:sporty/models/event_model.dart';
-import 'package:sporty/models/user_model.dart';
 import 'package:sporty/screens/create_event_sceen.dart';
 import 'package:sporty/screens/joined_envent_screen.dart';
 import 'package:sporty/screens/profile_screen.dart';
 
 import '../widgets/custom_event_item.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
-  bool isLoading = false;
   static String id = 'homeScreen';
-  List<EventsModel> eventsList = [];
-  // List<UserModel> usersList = [];
-  List<UserModel> userList = [];
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late String email = '';
+  @override
+  void initState() {
+    super.initState();
+    context.read<EventCubit>().getEventsNotJoinedByUser(email);
+    // Pass the user's email to the function
+  }
+
   Widget build(BuildContext context) {
-    dynamic email = ModalRoute.of(context)!.settings.arguments;
+    email = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
       appBar: AppBar(
@@ -41,15 +45,13 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-            padding: const EdgeInsets.all(12),
-            child: TextField(
-              onSubmitted: (data) {
-              },
-              decoration: InputDecoration(
+              padding: const EdgeInsets.all(12),
+              child: TextField(
+                onSubmitted: (data) {},
+                decoration: InputDecoration(
                   hintText: 'Search',
                   suffixIcon: IconButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     color: kPramairycolor,
                     icon: const Icon(Icons.search),
                   ),
@@ -57,71 +59,48 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(
-                        color: kPramairycolor,
-                      ))),
-            ),
-          ),
-            Expanded(
-              child: BlocConsumer<EventCubit, EventState>(
-                listener: (context, state) {
-                   if (state is EventLoading) {
-                    isLoading = true;
-                  } else if (state is EventSuccessGitEvent) {
-                    eventsList = state.allEvents;
-                    isLoading = false;
-                  } else if (state is EventFailure) {
-                    scafoldmassage(context, 'have an erorr');
-                    isLoading = false;
-                  }
-                },
-                builder: (context, state) {
-                  return ModalProgressHUD(
-                    inAsyncCall: isLoading,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: ListView.builder(
-                        itemCount: eventsList.length,
-                        itemBuilder: (context, index) {
-                          EventsModel event = eventsList[index];
-  
-                          bool joined = false;
-                          for (var userEmail in userList) {
-                            if (userEmail == email) {
-                              joined = true;
-                              break;
-                            }
-                          }
-                          return !joined
-                              ? CustomItemEvent(
-                                  eventName: event.eventName,
-                                  sportType: event.sportType,
-                                  city: event.city,
-                                  date: event.date,
-                                  onPressed: () {
-                                    BlocProvider.of<UserCubit>(context)
-                                        .addUserToEvent(
-                                      userEmail: email,
-                                      userAdmin: false,
-                                      eventId: event.eventId,
-                                    );
-                                  },
-                                )
-                              : CustomItemEvent(
-                                  eventName: event.eventName,
-                                  sportType: event.sportType,
-                                  city: event.city,
-                                  date: event.date,
-                                  onPressed: () {
-                                    scafoldmassage(
-                                        context, 'your are already Joined');
-                                  },
-                                );
-                        },
-                      ),
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                      color: kPramairycolor,
                     ),
-                  );
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: BlocBuilder<EventCubit, EventState>(
+                builder: (context, state) {
+                  // Access the event state and handle different cases
+                  if (state is EventLoading) {
+                    // Handle loading state
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is EventSuccessNotJoined) {
+                    // Handle success state
+                    final events = state.events;
+                    // Render the event list using the events data
+                    return ListView.builder(
+                      itemCount: events!.length,
+                      itemBuilder: (context, index) {
+                        final event = events[index];
+                        return CustomItemEvent(
+                          eventName: event.eventName,
+                          sportType: event.sportType,
+                          city: event.city,
+                          date: event.date,
+                          onPressed: () {
+                            final eventCubit = context.read<EventCubit>();
+                            eventCubit.joinEvent(event.id, email);
+                          },
+                        );
+                      },
+                    );
+                  } else if (state is EventFailure) {
+                    // Handle failure state
+                    return const Text('Failed to load events.');
+                  } else {
+                    // Handle initial or other states
+                    return const SizedBox();
+                  }
                 },
               ),
             ),
@@ -151,7 +130,6 @@ class HomeScreen extends StatelessWidget {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () async {
-                BlocProvider.of<UserCubit>(context).getUser(email);
                 Navigator.pushNamed(context, MyProfileScreen.id,
                     arguments: email);
               },
@@ -164,3 +142,56 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+// class MyComponent extends StatefulWidget {
+//   @override
+//   _MyComponentState createState() => _MyComponentState();
+// }
+
+// class _MyComponentState extends State<MyComponent> {
+//   final EventCubit eventCubit = EventCubit();
+
+//   @override
+//   void initState() {
+//     super.initState();
+
+//     final userEmail = 'user@example.com'; // Replace with the actual user's email or a variable representing the user's email
+//     eventCubit.getEventsNotJoinedByUser(userEmail);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Events Not Joined by Me'),
+//       ),
+//       body: BlocBuilder<EventCubit, EventState>(
+//         bloc: eventCubit,
+//         builder: (context, state) {
+//           if (state is EventLoading) {
+//             return CircularProgressIndicator();
+//           } else if (state is EventSuccess) {
+//             final events = state.events;
+//             // Display the events not joined by the user
+//             return ListView.builder(
+//               itemCount: events.length,
+//               itemBuilder: (context, index) {
+//                 final event = events[index];
+//                 return ListTile(
+//                   title: Text(event.eventName),
+//                   subtitle: Text(event.sportType),
+//                   // Other event details...
+//                 );
+//               },
+//             );
+//           } else if (state is EventFailure) {
+//             return Text('Failed to load events.');
+//           } else {
+//             return Text('No events found.');
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }

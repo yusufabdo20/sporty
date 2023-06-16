@@ -4,7 +4,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sporty/constanse.dart';
 import 'package:sporty/cubit/auth_cubit/auth_cubit.dart';
 import 'package:sporty/helper/show-snack-bar.dart';
-import 'package:sporty/services/network/authServices.dart';
 import 'package:sporty/widgets/custom_button.dart';
 import 'package:sporty/widgets/custom_image_list.dart';
 import 'package:sporty/widgets/custom_text_field.dart';

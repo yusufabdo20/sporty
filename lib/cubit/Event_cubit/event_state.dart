@@ -11,20 +11,32 @@ class EventFailure extends EventState {}
 
 class EventSuccess extends EventState {}
 
-class EventSuccessGitEvent extends EventState {
-  List<EventsModel> allEvents;
-
-  EventSuccessGitEvent({required this.allEvents});
+class EventSuccessNotJoined extends EventState {
+  List<EventModel>? events;
+  EventSuccessNotJoined({this.events});
 }
 
-// class EventSuccessGitEventUsers extends EventState {
-//   List<UserModel> allEventsUsers;
+class EventSuccessJoined extends EventState {
+  List<EventModel>? joinevents;
+  EventSuccessJoined({this.joinevents});
+}
 
-//   EventSuccessGitEventUsers({required this.allEventsUsers});
+class EventJoinSuccess extends EventState {}
+
+// class EventSuccessGitEvent extends EventState {
+//   List<EventsModel> allEvents;
+
+//   EventSuccessGitEvent({required this.allEvents});
 // }
 
-// class EventSuccessGitEventMessages extends EventState {
-//   List<MessageModel> allEventsMessages;
+// // class EventSuccessGitEventUsers extends EventState {
+// //   List<UserModel> allEventsUsers;
 
-//   EventSuccessGitEventMessages({required this.allEventsMessages});
-// }
+// //   EventSuccessGitEventUsers({required this.allEventsUsers});
+// // }
+
+// // class EventSuccessGitEventMessages extends EventState {
+// //   List<MessageModel> allEventsMessages;
+
+// //   EventSuccessGitEventMessages({required this.allEventsMessages});
+// // }

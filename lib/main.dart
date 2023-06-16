@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => EventCubit()),
           BlocProvider(create: (context) => AuthCubit()),
-          BlocProvider(create: (context) => UserCubit()),
           BlocProvider(create: (context) => MessageCubit()),
         ],
         child: MaterialApp(
@@ -45,8 +44,11 @@ class MyApp extends StatelessWidget {
             SignUpScreen.id: (context) => SignUpScreen(),
             HomeScreen.id: (context) => HomeScreen(),
             MyProfileScreen.id: (context) => MyProfileScreen(),
+            ChatScreen.id: (context) => ChatScreen(
+                  eventId: '',
+                  addMessageToEvent: (eventId, message, userEmail) {},
+                ),
             MyJoinedScreen.id: (context) => MyJoinedScreen(),
-            ChatScreen.id: (context) => ChatScreen(),
             CreateEventScreen.id: (context) => CreateEventScreen(),
           },
           initialRoute: SplashScreen.id,

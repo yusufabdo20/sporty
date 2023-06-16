@@ -1,22 +1,11 @@
-class UserModel {
-  final String userEmail;
-  final String userName;
-  String? userImage;
-  bool userAdmin;
+class User {
+  String name;
+  String email;
+  String userImage;
 
-  UserModel({
-    required this.userName,
-    this.userImage,
-    required this.userAdmin,
-    required this.userEmail,
+  User({
+    required this.name,
+    required this.email,
+    required this.userImage,
   });
-
-  factory UserModel.fromJson(Map<String, dynamic> jsonData) {
-    return UserModel(
-      userName: jsonData['userName'],
-      userImage: jsonData['userImage'] == null ? '' : jsonData['userImage'] ,
-      userEmail: jsonData['userEmail'],
-      userAdmin: jsonData['userAdmin'] == false ? false : true,
-    );
-  }
 }

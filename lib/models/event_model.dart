@@ -68,18 +68,22 @@ class EventModel {
   //   );
   // }
   factory EventModel.fromMap(Map<String, dynamic> map, String id) {
-  final users = map['users'];
-  final messages = map['messages'];
+    final users = map['users'];
+    final messages = map['messages'];
 
-  return EventModel(
-    id: id,
-    eventName: map['eventName'] ?? '',
-    sportType: map['sportType'] ?? '',
-    city: map['city'] ?? '',
-    date: map['date'] ?? '',
-    createdAt: (map['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-    users: (users != null && users is List) ? List<Map<String, dynamic>>.from(users) : [],
-    messages: (messages != null && messages is List) ? List<Map<String, dynamic>>.from(messages) : [],
-  );
-}
+    return EventModel(
+      id: id,
+      eventName: map['eventName'] ?? '',
+      sportType: map['sportType'] ?? '',
+      city: map['city'] ?? '',
+      date: map['date'] ?? '',
+      createdAt: (map['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      users: (users != null && users is List)
+          ? List<Map<String, dynamic>>.from(users)
+          : [],
+      messages: (messages != null && messages is List)
+          ? List<Map<String, dynamic>>.from(messages)
+          : [],
+    );
+  }
 }

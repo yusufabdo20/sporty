@@ -33,6 +33,54 @@
 // }
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sporty/models/user_model.dart';
+
+// class EventModel {
+//   final String id;
+//   final String eventName;
+//   final String sportType;
+//   final String city;
+//   final String date;
+//   final DateTime createdAt;
+//   List<Users> users;
+//   List<Map<String, dynamic>> messages;
+
+//   EventModel({
+//     required this.id,
+//     required this.eventName,
+//     required this.sportType,
+//     required this.city,
+//     required this.date,
+//     required this.createdAt,
+//     required this.users,
+//     required this.messages,
+//   });
+
+//   // factory EventModel.fromMap(Map<String, dynamic> map, String id) {
+//   //   return EventModel(
+//   //     id: id,
+//   //     eventName: map['eventName'],
+//   //     sportType: map['sportType'],
+//   //     city: map['city'],
+//   //     date: map['date'],
+//   //     createdAt: map['createdAt'].toDate(),
+//   //     users: List<Map<String, dynamic>>.from(map['users']),
+//   //     messages: List<Map<String, dynamic>>.from(map['messages']),
+//   //   );
+//   // }
+//   factory EventModel.fromMap(Map<String, dynamic> map, String id) {
+//     return EventModel(
+//       id: id,
+//       eventName: map['eventName'] ?? '',
+//       sportType: map['sportType'] ?? '',
+//       city: map['city'] ?? '',
+//       date: map['date'] ?? '',
+//       createdAt: (map['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+//       messages:  List<Users> ,
+//       users: ,
+//     );
+//   }
+// }
 
 class EventModel {
   final String id;
@@ -41,8 +89,8 @@ class EventModel {
   final String city;
   final String date;
   final DateTime createdAt;
-  List<Map<String, dynamic>> users;
-  List<Map<String, dynamic>> messages;
+  List<Users> users;
+  List<Messages> messages;
 
   EventModel({
     required this.id,
@@ -55,21 +103,29 @@ class EventModel {
     required this.messages,
   });
 
-  // factory EventModel.fromMap(Map<String, dynamic> map, String id) {
-  //   return EventModel(
-  //     id: id,
-  //     eventName: map['eventName'],
-  //     sportType: map['sportType'],
-  //     city: map['city'],
-  //     date: map['date'],
-  //     createdAt: map['createdAt'].toDate(),
-  //     users: List<Map<String, dynamic>>.from(map['users']),
-  //     messages: List<Map<String, dynamic>>.from(map['messages']),
-  //   );
-  // }
   factory EventModel.fromMap(Map<String, dynamic> map, String id) {
-    final users = map['users'];
-    final messages = map['messages'];
+    final usersList = map['users'] as List<dynamic>?;
+    final messagesList = map['messages'] as List<dynamic>?;
+
+    List<Users> users = [];
+    List<Messages> messages = [];
+    if (usersList != null) {
+      users = usersList.map((userMap) {
+        return Users(
+          userEmail: userMap['userEmail'] ?? '',
+          userAdmin: userMap['userAdmin'] ?? '',
+        );
+      }).toList();
+    }
+
+    if (messagesList != null) {
+      messages = messagesList.map((messagmap) {
+        return Messages(
+          idMail: messagmap['idMAil'] ?? '',
+          message: messagmap['message'] ?? '',
+        );
+      }).toList();
+    }
 
     return EventModel(
       id: id,
@@ -78,12 +134,28 @@ class EventModel {
       city: map['city'] ?? '',
       date: map['date'] ?? '',
       createdAt: (map['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-      users: (users != null && users is List)
-          ? List<Map<String, dynamic>>.from(users)
-          : [],
-      messages: (messages != null && messages is List)
-          ? List<Map<String, dynamic>>.from(messages)
-          : [],
+      users: users,
+      messages: messages,
     );
   }
+}
+
+class Users {
+  final String userEmail;
+  final String userAdmin;
+
+  Users({
+    required this.userEmail,
+    required this.userAdmin,
+  });
+}
+
+class Messages {
+  final String idMail;
+  final String message;
+
+  Messages({
+    required this.idMail,
+    required this.message,
+  });
 }

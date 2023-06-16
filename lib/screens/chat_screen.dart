@@ -6,31 +6,30 @@ import 'package:sporty/models/massage_model.dart';
 import 'package:sporty/widgets/chat_buble.dart';
 
 class ChatScreen extends StatelessWidget {
-  ChatScreen({required this.eventId, required this.addMessageToEvent});
+  ChatScreen({super.key});
 
   static String id = 'chatScreen';
-  late String eventId;
-  late Function(String, String, String) addMessageToEvent;
+  // late String eventId;
+  // late Function(String, String, String) addMessageToEvent;
 
   TextEditingController messageController = TextEditingController();
 
+  // void submitMessage(String message, String userEmail) {
+  //   // Invoke the addMessageToEvent method when the user submits a message
+  //   addMessageToEvent(eventId, message, userEmail);
 
-  void submitMessage(String message, String userEmail) {
-    // Invoke the addMessageToEvent method when the user submits a message
-    addMessageToEvent(eventId, message, userEmail);
-
-    // Clear the text field after submitting the message
-    messageController.clear();
-  }
+  //   // Clear the text field after submitting the message
+  //   messageController.clear();
+  // }
 
   final _controllar = ScrollController();
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> arguments =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final String email = arguments['email'];
-    final List<MessageModel> messagesList = arguments['messageList'];
-    eventId = arguments['eventId'];
+    // final Map<String, dynamic> arguments =
+    //     ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    // final String email = arguments['email'];
+    final List<MessageModel> messagesList = [];
+    // // eventId = arguments['eventId'];
 
     return Scaffold(
       appBar: AppBar(
@@ -41,21 +40,39 @@ class ChatScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              reverse: true,
-              controller: _controllar,
-              itemCount: messagesList.length,
-              itemBuilder: (context, index) {
-                return messagesList[index].id == email
-                    ? ChatBubel(
-                        massage: messagesList[index],
-                        email: messagesList[index].id,
-                      )
-                    : ChatBubelFriend(
-                        massage: messagesList[index],
-                        email: messagesList[index].id);
-              },
+            child: Expanded(
+              child: ListView(
+                children: [
+                  ChatBubel(
+                    massage: 'Hi',
+                    email: 'Welcom Message',
+                  ),
+                  ChatBubel(
+                    massage: 'How Are you',
+                    email: 'Welcome Message',
+                  ),
+                  // ChatBubelFriend(
+                  //   massage: 'Fine',
+                  //   email: 'Moo',
+                  // ),
+                ],
+              ),
             ),
+            // : ListView.builder(
+            //     reverse: true,
+            //     controller: _controllar,
+            //     itemCount: messagesList.length,
+            //     itemBuilder: (context, index) {
+            //       return messagesList[index].id == 'email'
+            //           ? ChatBubel(
+            //               massage: messagesList[index].message,
+            //               email: messagesList[index].id,
+            //             )
+            //           : ChatBubelFriend(
+            //               massage: messagesList[index].message,
+            //               email: messagesList[index].id);
+            //     },
+            //   ),
           ),
           Padding(
               padding: const EdgeInsets.all(12),
@@ -73,8 +90,8 @@ class ChatScreen extends StatelessWidget {
                     onPressed: () {
                       final message = messageController.text;
                       final userEmail =
-                          email; // Replace with the actual user's email or a variable representing the user's email
-                      submitMessage(message, userEmail);
+                          'email'; // Replace with the actual user's email or a variable representing the user's email
+                      // submitMessage(message, userEmail);
                     },
                     icon: Icon(Icons.send),
                   ),

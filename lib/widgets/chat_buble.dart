@@ -3,13 +3,14 @@ import 'package:sporty/models/massage_model.dart';
 
 class ChatBubel extends StatelessWidget {
   ChatBubel({super.key, required this.massage, required this.email});
-  final MessageModel massage;
+  final String massage;
   final String email;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
+        width: 150,
         padding: const EdgeInsets.only(
           left: 12,
           top: 16,
@@ -31,7 +32,7 @@ class ChatBubel extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              massage.message,
+              massage,
               style: const TextStyle(
                 color: Colors.white,
               ),
@@ -56,13 +57,15 @@ class ChatBubel extends StatelessWidget {
 
 class ChatBubelFriend extends StatelessWidget {
   ChatBubelFriend({super.key, required this.massage, required this.email});
-  final MessageModel massage;
+  final String massage;
    final String email;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
+        width: 100,
+        // height: 80,
         padding: const EdgeInsets.only(
           left: 12,
           top: 16,
@@ -84,13 +87,13 @@ class ChatBubelFriend extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              massage.message,
+              massage,
               style: const TextStyle(
-                color: Colors.black,
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   email,

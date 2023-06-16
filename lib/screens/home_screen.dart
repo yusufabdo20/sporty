@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sporty/constanse.dart';
 import 'package:sporty/cubit/event_cubit/event_cubit.dart';
+import 'package:sporty/models/event_model.dart';
 import 'package:sporty/screens/create_event_sceen.dart';
 import 'package:sporty/screens/joined_envent_screen.dart';
 import 'package:sporty/screens/profile_screen.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<EventCubit>().getEventsNotJoinedByUser(email);
+    context.read<EventCubit>().fetchEventsNot(email);
     // Pass the user's email to the function
   }
 
@@ -68,41 +69,65 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Expanded(
-              child: BlocBuilder<EventCubit, EventState>(
-                builder: (context, state) {
-                  // Access the event state and handle different cases
-                  if (state is EventLoading) {
-                    // Handle loading state
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is EventSuccessNotJoined) {
-                    // Handle success state
-                    final events = state.events;
-                    // Render the event list using the events data
-                    return ListView.builder(
-                      itemCount: events!.length,
-                      itemBuilder: (context, index) {
-                        final event = events[index];
-                        return CustomItemEvent(
-                          eventName: event.eventName,
-                          sportType: event.sportType,
-                          city: event.city,
-                          date: event.date,
-                          onPressed: () {
-                            final eventCubit = context.read<EventCubit>();
-                            eventCubit.joinEvent(event.id, email);
-                          },
-                        );
-                      },
-                    );
-                  } else if (state is EventFailure) {
-                    // Handle failure state
-                    return const Text('Failed to load events.');
-                  } else {
-                    // Handle initial or other states
-                    return const SizedBox();
-                  }
-                },
-              ),
+              child: ListView(children: [
+                CustomItemEvent(
+                  eventName: 'Go',
+                  sportType: 'FootBall',
+                  city: city[3],
+                  date: day[2],
+                  onPressed: () {},
+                ),
+                // CustomItemEvent(
+                //   eventName: 'Speed',
+                //   sportType: 'Tennis',
+                //   city: city[4],
+                //   date: day[6],
+                //   onPressed: () {},
+                // ),
+                CustomItemEvent(
+                  eventName: 'Pes && Fifa',
+                  sportType: 'Play Station',
+                  city: city[7],
+                  date: day[3],
+                  onPressed: () {},
+                ),
+              ]),
+
+              // child: BlocBuilder<EventCubit, EventState>(
+              //   builder: (context, state) {
+              //     // Access the event state and handle different cases
+              //     if (state is EventLoading) {
+              //       // Handle loading state
+              //       return const Center(child: CircularProgressIndicator());
+              //     } else if (state is EventSuccessNotJoined) {
+              //       // Handle success state
+              //       List<EventModel>? events = state.events;
+              //       // Render the event list using the events data
+              //       return ListView.builder(
+              //         itemCount: events!.length,
+              //         itemBuilder: (context, index) {
+              //           final event = events[index];
+              //           return CustomItemEvent(
+              //             eventName: event.eventName,
+              //             sportType: event.sportType,
+              //             city: event.city,
+              //             date: event.date,
+              //             onPressed: () {
+              //               final eventCubit = context.read<EventCubit>();
+              //               eventCubit.joinEvent(event.id, email);
+              //             },
+              //           );
+              //         },
+              //       );
+              //     } else if (state is EventFailure) {
+              //       // Handle failure state
+              //       return const Text('Failed to load events.');
+              //     } else {
+              //       // Handle initial or other states
+              //       return const SizedBox();
+              //     }
+              //   },
+              // ),
             ),
           ],
         ),

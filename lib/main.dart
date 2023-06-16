@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
             HomeScreen.id: (context) => HomeScreen(),
             MyProfileScreen.id: (context) => MyProfileScreen(),
             ChatScreen.id: (context) => ChatScreen(
-                  eventId: '',
-                  addMessageToEvent: (eventId, message, userEmail) {},
+                // eventId: 'moooo',
+                // addMessageToEvent: (eventId, message, userEmail) {},
                 ),
             MyJoinedScreen.id: (context) => MyJoinedScreen(),
             CreateEventScreen.id: (context) => CreateEventScreen(),

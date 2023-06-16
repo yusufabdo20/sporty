@@ -9,3 +9,15 @@ class User {
     required this.userImage,
   });
 }
+
+// class Users {
+//   String userEmail;
+//   String userAdmin;
+
+//   Users({
+//     required this.userEmail,
+//     required this.userAdmin,
+//   });
+// }
+
+

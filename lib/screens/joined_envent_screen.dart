@@ -20,13 +20,12 @@ class MyJoinedScreen extends StatefulWidget {
 }
 
 class _MyJoinedScreenState extends State<MyJoinedScreen> {
-  late String email = ''; 
+  late String email = '';
   @override
   void initState() {
     super.initState();
     final eventCubit = context.read<EventCubit>();
-    eventCubit
-        .getEventsJoinedByUser(email); // Pass the user's email to the function
+    eventCubit.fetchEvents(email); // Pass the user's email to the function
   }
 
   Widget build(BuildContext context) {
@@ -40,55 +39,70 @@ class _MyJoinedScreenState extends State<MyJoinedScreen> {
         child: Column(
           children: [
             Expanded(
-              child: BlocBuilder<EventCubit, EventState>(
-                builder: (context, state) {
-                  // Access the event state and handle different cases
-                  if (state is EventLoading) {
-                    // Handle loading state
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is EventSuccessJoined) {
-                    // Handle success state
-                    final events = state.joinevents;
-                    // Render the event list using the events data
-                    return ListView.builder(
-                      itemCount: events!.length,
-                      itemBuilder: (context, index) {
-                        final event = events[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              ChatScreen.id,
-                              arguments: {
-                                'messageList': events[index].messages,
-                                'eventId': events[index].id,
-                                'email': email,
-                              },
-                            );
-                          },
-                          child: CustomJoinedEvent(
-                            eventName: event.eventName,
-                            sportType: event.sportType,
-                            city: event.city,
-                            date: event.date,
-                            onPressed: () {
-                              final eventCubit = context.read<EventCubit>();
-                              eventCubit.deleteEvent(event.id, email);
-                            },
-                          ),
-                        );
-                      },
-                    );
-                  } else if (state is EventFailure) {
-                    // Handle failure state
-                    return const Text('Failed to load events.');
-                  } else {
-                    // Handle initial or other states
-                    return const SizedBox();
-                  }
-                },
+                child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, ChatScreen.id);
+              },
+              child: ListView(
+                children: [
+                  CustomJoinedEvent(
+                    eventName: 'Be Strong',
+                    sportType: 'Running',
+                    city: city[1],
+                    date: day[1],
+                    onPressed: () {},
+                  ),
+                  CustomJoinedEvent(
+                    eventName: 'Speed',
+                    sportType: 'Tennis',
+                    city: city[4],
+                    date: day[6],
+                    onPressed: () {},
+                  ),
+                ],
               ),
-            ),
+            )
+                //BlocBuilder<EventCubit, EventState>(
+                //   builder: (context, state) {
+                //     // Access the event state and handle different cases
+                //     if (state is EventLoading) {
+                //       // Handle loading state
+                //       return const Center(child: CircularProgressIndicator());
+                //     } else if (state is EventSuccessJoined) {
+                //       // Handle success state
+                //       final events = state.joinevents;
+                //       // Render the event list using the events data
+                //       return ListView.builder(
+                //         itemCount: 1,
+                //         itemBuilder: (context, itemCount) {
+                //           final event = events[1];
+                //           return GestureDetector(
+                //             onTap: () {
+                //               Navigator.pushNamed(context, ChatScreen.id);
+                //             },
+                //             child: CustomJoinedEvent(
+                //               eventName: 'Mooo',
+                //               sportType: 'Running',
+                //               city: city[1],
+                //               date: day[1],
+                //               onPressed: () {
+                //                 final eventCubit = context.read<EventCubit>();
+                //                 eventCubit.deleteEvent(event.id, email);
+                //               },
+                //             ),
+                //           );
+                //         },
+                //       );
+                //     } else if (state is EventFailure) {
+                //       // Handle failure state
+                //       return const Text('Failed to load events.');
+                //     } else {
+                //       // Handle initial or other states
+                //       return const SizedBox();
+                //     }
+                //   },
+                // ),
+                ),
           ],
         ),
       ),
